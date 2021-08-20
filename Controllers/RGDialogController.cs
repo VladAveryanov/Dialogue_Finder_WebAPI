@@ -23,7 +23,7 @@ namespace Dialogue_Finder_WebAPI.Controllers
         [Route("getDialog")]
         public IActionResult GetDialog ([FromQuery] Guid[] clients)
         {
-            int hash = 1;
+            long hash = 1;
             foreach (var element in clients)
             {
                 hash *= element.GetHashCode();
@@ -31,10 +31,10 @@ namespace Dialogue_Finder_WebAPI.Controllers
             var dialogs = new RGDialogsClients().Init();
 
             // contains Hash of IDClients as Key and IDRGDialog as Value
-            var dict1 = new Dictionary<int, Guid>();
+            var dict1 = new Dictionary<long, Guid>();
 
             // contains IDRGDialog as key and Hash of IDClients as Value;
-            var dict2 = new Dictionary<Guid, int>();
+            var dict2 = new Dictionary<Guid, long>();
 
             foreach (var rgdialog in dialogs)
             { 
