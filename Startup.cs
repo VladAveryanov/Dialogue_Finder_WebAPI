@@ -26,6 +26,15 @@ namespace Dialogue_Finder_WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("test",
+                    new Microsoft.OpenApi.Models.OpenApiInfo
+                    {
+                        Title = "Swagger RGDialog API"
+                    }); ;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +54,13 @@ namespace Dialogue_Finder_WebAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(options => 
+            {
+                options.SwaggerEndpoint("/swagger/test/swagger.json", "Swagger RGDialog");
             });
         }
     }
